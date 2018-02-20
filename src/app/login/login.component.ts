@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { fakeAsync } from '@angular/core/testing';
 
 @Component({
@@ -22,16 +22,18 @@ public serverCredentials = {};
   });
   constructor( private route: ActivatedRoute,
                private router: Router,
-               private authrnticationService: AuthenticationService) { }
+               private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+     // reset login status
+     this.authenticationService.logout();
      // get return url from route parameters or default to '/'
      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   checkIn() {
     this.validation = true;
     this.credentials = this.loginForm.value;
-    this.authrnticationService.checkIn(this.credentials['username'], this.credentials['password'])
+    this.authenticationService.checkIn(this.credentials['username'], this.credentials['password'])
       .subscribe(data => {this.router.navigate([this.returnUrl]); },
                  error => {alert('an error occured');
                            this.validation = false;
