@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog} from '@angular/material';
+import { SatifactionFactorEditComponent } from './satifaction-factor-edit/satifaction-factor-edit.component';
 
 
 @Component({
@@ -9,7 +10,8 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
   styleUrls: ['./satisfaction-factors.component.css']
 })
 export class SatisfactionFactorsComponent implements OnInit {
-  displayedColumns = ['select','position', 'factor', 'description'];
+  dialogResult ="";
+  displayedColumns = ['position', 'factor', 'description', 'actions'];
   dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
   selection = new SelectionModel<Element>(true, []);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,16 +40,27 @@ export class SatisfactionFactorsComponent implements OnInit {
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  /* Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  constructor() { }
+  constructor(private dialog:MatDialog) { }
 
   ngOnInit() {
+  }
+  editFactor(){
+    let dialogRef=this.dialog.open(SatifactionFactorEditComponent,{
+         width:'600px',
+         data:'{{}}'
+    });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log('dialog Closed: ${result}');
+      this.dialogResult=result;
+    })
   }
 
 }

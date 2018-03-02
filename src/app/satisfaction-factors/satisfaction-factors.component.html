@@ -1,4 +1,4 @@
-<h1>Satisfaction-factors list</h1>
+<h2>Satisfaction-factors list</h2>
 <div class="row" style="padding-left:30px; ">
   
       <div class="col-lg-11 col-sm-10 col-md-10 example-container mat-elevation-z8" style="margin-top:20px; background-color:azure" >
@@ -11,51 +11,43 @@
         
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
-                  <ng-container matColumnDef="select">
-                          <mat-header-cell *matHeaderCellDef>
-                            <mat-checkbox (change)="$event ? masterToggle() : null"
-                                          [checked]="selection.hasValue() && isAllSelected()"
-                                          [indeterminate]="selection.hasValue() && !isAllSelected()">
-                            </mat-checkbox>
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let row">
-                            <mat-checkbox (click)="$event.stopPropagation()"
-                                          (change)="$event ? selection.toggle(row) : null"
-                                          [checked]="selection.isSelected(row)">
-                            </mat-checkbox>
-                          </mat-cell>
-                        </ng-container>
+                 
             <!-- Position Column -->
             <ng-container matColumnDef="position">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="position-cell-padding"> No. </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="position-cell-padding"> {{element.position}} </mat-cell>
             </ng-container>
         
             <!-- Name Column -->
             <ng-container matColumnDef="factor">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Factor </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.factor}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="factor-cell-padding"> Factor </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="factor-cell-padding"> {{element.factor}} </mat-cell>
             </ng-container>
         
             <!-- Weight Column -->
             <ng-container matColumnDef="description">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="description-cell-padding"> Description </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="description-cell-padding"> {{element.description}} </mat-cell>
             </ng-container>
-        
-            <!-- Symbol Column -->
-            <!-- //should be replaced by action(add,update,delete) -->
-            <!-- <ng-container matColumnDef="symbol">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </mat-header-cell>
-              <mat-cell *matCellDef="let element" (click)="selectRow(row)"> {{element.symbol}} </mat-cell>
-            </ng-container> -->
-        
+
+            <!-- actions -->
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+              <mat-cell *matCellDef="let element" >
+                <button type="button" class="btn btn-primary btn-sm" (click)="editFactor()">
+                  <span class="glyphicon glyphicon-pencil" >Edit</span></button>
+                  <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-trash"></span> Delete</button> 
+                    
+              </mat-cell>
+          </ng-container>
+               
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
        
         <mat-paginator #paginator
-        [pageSize]="10"
+        [pageSize]="5"
         [pageSizeOptions]="[5, 10, 20]">
           </mat-paginator>
     

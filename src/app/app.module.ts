@@ -31,6 +31,7 @@ import { SatisfactionFactorsComponent } from './satisfaction-factors/satisfactio
 import { CreateFeedbackComponent } from './create-feedback/create-feedback.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjectEditComponent } from './projects/project-edit/project-edit.component';
+import { SatifactionFactorEditComponent } from './satisfaction-factors/satifaction-factor-edit/satifaction-factor-edit.component';
 
 
 
@@ -46,6 +47,7 @@ import { ProjectEditComponent } from './projects/project-edit/project-edit.compo
     CreateFeedbackComponent,
     DashboardComponent,
     ProjectEditComponent,
+    SatifactionFactorEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { ProjectEditComponent } from './projects/project-edit/project-edit.compo
              ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ProjectEditComponent
+    ProjectEditComponent,
+    SatifactionFactorEditComponent
 ]
 })
 export class AppModule { }
