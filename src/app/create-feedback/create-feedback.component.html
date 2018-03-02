@@ -1,0 +1,310 @@
+
+<mat-horizontal-stepper #stepper="matHorizontalStepper">
+  <!-- Enter the details stepper -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Enter the details</ng-template>
+          <div class="panel panel-default">
+            <div class="panel-heading panel-heading-custom text-center">Fill out the details below</div>
+            <div class="panel-body">
+              <div class="container">
+                <!-- client details -->
+                  <div class="row row1">
+                    <div class="col-xs-6 col-sm-6 col-md-5 col-md-offset-1 form-group">
+                      <label for ="clientOrg">1. Client Organization:</label>
+                      <select class="selectpicker" data-live-search="true" id="clientOrg" formControlName="clientOrg">
+                      <option data-tokens="ketchup mustard" *ngFor ="let org of clientOrgs">{{org}}</option>        
+                      </select> 
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 form-group">
+                      <label for ="clientContact">2. Client Contact:</label>
+                      <select class="selectpicker" data-live-search="true" id="clientContact" formControlName="clientContact">
+                      <option data-tokens="ketchup mustard" *ngFor ="let org of clientOrgs">{{org}}</option>        
+                      </select> 
+                    </div>    
+                  </div>
+                <!-- service delivery details -->
+                  <div class="row row1">
+                    <div class="col-xs-6 col-sm-6 col-md-5 col-md-offset-1 form-group">
+                      <label for ="sdLead">3. Sales Delivery Lead:</label>
+                      <select class="selectpicker" data-live-search="true" id="sdLead" formControlName="sdLead">
+                      <option data-tokens="ketchup mustard" *ngFor ="let org of clientOrgs">{{org}}</option>        
+                      </select> 
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 form-group">
+                      <label for ="sLead">4. Sales Lead:</label>
+                      <select class="selectpicker" data-live-search="true" id="sLead" formControlName="sLead">
+                      <option data-tokens="ketchup mustard" *ngFor ="let org of clientOrgs">{{org}}</option>        
+                      </select> 
+                    </div>    
+                  </div>
+                <!-- Scope of service/description -->
+                  <div class="row row1">
+                    <div class="col-xs-12 col-sm-12 col-md-11 col-md-offset-1 form-group">
+                      <label for ="scope">5. Scope of Service/Description:</label>
+                      <select class="selectpicker" data-live-search="true" id="scope" formControlName="scope">
+                      <option data-tokens="ketchup mustard" *ngFor ="let org of clientOrgs">{{org}}</option>        
+                      </select> 
+                    </div>
+                  </div>
+                <!-- buttons -->
+                <div class="row row1 text-center">
+                    <div class="col-xs-12 col-sm-12 col-md-11 col-md-offset-1 form-group">
+                    <!-- <button mat-button matStepperPrevious>Back</button> -->
+                    <button mat-button matStepperNext (click)="add()">Next</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+    </mat-step>
+
+  <!-- client satisfaction factors -->
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Satisfaction Factors</ng-template>
+        <div class="panel panel-default">
+          <div class="panel-heading panel-heading-custom text-center">Select the factors listed below</div>
+            <div class="panel-body">
+                <mat-table #table [dataSource]="dataSource">
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="factor">
+                      <mat-header-cell *matHeaderCellDef> Factor Name </mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                          <mat-selection-list #list>
+                            <mat-list-option checkboxPosition [selected]="element.selected" [value]="element.factor"
+                            (click)="onListControlChanged(list)">{{element.factor}}</mat-list-option>
+                          </mat-selection-list>
+                      </mat-cell>
+                    </ng-container>        
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                 
+                  <mat-paginator #paginator
+                                 [pageSize]="5"
+                                 [pageSizeOptions]="[5, 10, 20]">
+                  </mat-paginator>
+                  <div style="text-align: center;">
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button matStepperNext (click)="addFactors()">Next</button>
+                  </div>
+            </div>
+          </div>
+    </mat-step>
+
+<!-- Final create feedback form -->
+<mat-step [stepControl]="thirdFormGroup">
+  <ng-template matStepLabel>Final Form</ng-template>
+    <div class="container">
+      <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+          <div class="panel panel-default" style="width: 275%;margin-left: -360px;">
+            <div class="panel-heading panel-heading-custom text-center">Feedback Form</div>
+              <div class="panel-body">Thank you for taking the time to fill our online feedback form. By providing us the feedback,
+                you are helping us understand what we do well and what improvements we need to implement.
+              </div>
+            <div class="panel-body">
+               <form [formGroup]="thirdFormGroup" *ngIf="showThirdForm">
+      <!-- first row -->
+                  <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+                      <div class="form-group">
+                        <p>Date: <span>{{today | date:"MM/dd/yy"}}</span></p>
+                            <!-- <mat-form-field style="width: 90px;">
+                                <input matInput [matDatepicker]="picker" type="text" [value]="user">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field> -->
+                      </div>
+                    </div>
+                    <div class="col-xs-5 col-sm-5 col-md-5">
+                      <div class="form-group client">
+                        <p>Client Organisation: <span>{{data[0].clientOrg}}</span></p>
+                          <!-- <input type="text" class="form-control" id="scopeOfService" formControlName="seventhCtrl"> -->
+                          <!-- <input type="text" name="clientOrganisation" id="clientOrg" required class="form-control input-sm" 
+                            style="width:240px; float:right;"> -->
+                         <!-- <div *ngIf ="clientOrg.errors && (clientOrg.dirty || clientOrg.touched)" class="alert alert-danger">
+                           Please enter a value in client Organaisation
+                         </div> -->
+                      </div>
+                    </div>
+                    <div class="col-xs-5 col-sm-5 col-md-5">
+                      <div class="form-group Sos">
+                          <!-- <label for="scope">Scope of service:</label> -->
+                          <p>Scope of service: <span>{{data[0].scope}}</span></p>
+                          <!-- <input type="text" name="scopeOfService" id="scope" required Class="form-control input-sm"
+                            style="width:255px; float:right;"> -->
+                            <!-- <div *ngIf ="scope.errors && (scope.dirty || scope.touched)" class="alert alert-danger">
+                              Please enter a value in Scope
+                            </div> -->
+                        </div>
+                      </div>
+                    </div>
+
+    <!-- second row -->
+            <div class="row">
+                <div class="col-xs-7 col-sm-7 col-md-7">
+                  <div class="form-group sales-delivery-lead">
+                    <!-- <label for="serviceLead">Service Delivery Lead:</label> -->
+                    <p>Service Delivery Lead: <span>{{data[0].sdLead}}</span></p>
+                    <!-- <input type="text" name="ServiceLead" id="serviceLead" required class="form-control input-sm"
+                      style="width: 390px; float:right;"> -->
+                    <!-- <div *ngIf ="serviceLead.errors && (serviceLead.dirty || serviceLead.touched)" class="alert alert-danger">
+                      Please enter the service lead
+                    </div> -->
+                  </div>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5">
+                  <div class="form-group sales-lead">
+                      <p>Sales Lead: <span>{{data[0].sLead}}</span></p>
+                    <!-- <label for="salesLead">Sales Lead:</label>
+                    <input type="text" name="saleslead" id="salesLead" required class="form-control input-sm"
+                     style="width: 295px; float:right;"> -->
+                    <!-- <div *ngIf ="salesLead.errors && (salesLead.dirty || salesLead.touched)" class="alert alert-danger">
+                      Please enter the sales lead
+                    </div> -->
+                  </div>
+                </div>
+            </div>
+    <!-- third row -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="form-group client-contact">
+                    <!-- <label for="serviceLead">Service Delivery Lead:</label> -->
+                    <p>Client Contact: <span>{{data[0].clientContact}}</span></p>
+                    <!-- <input type="text" name="ServiceLead" id="serviceLead" required class="form-control input-sm"
+                      style="width: 390px; float:right;"> -->
+                    <!-- <div *ngIf ="serviceLead.errors && (serviceLead.dirty || serviceLead.touched)" class="alert alert-danger">
+                      Please enter the service lead
+                    </div> -->
+                  </div>
+                </div>
+            </div>
+
+   <!-- heading -->
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <h4>satisfactionFactors:</h4>
+              </div>
+            </div>
+    <!--  -->
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <h4>Factors:</h4>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-md-offset-right-4">
+                <h4>Weight:(1-5)</h4>
+              </div>
+            </div>
+    <!-- satisfaction factors -->
+    <!-- factor 1 -->
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label>1. <span>{{selectedOptions[0]}}</span></label>
+                </div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-md-offset-right-4">
+                  <div class="dropdown">
+                      <mat-form-field>
+                          <mat-select>
+                            <mat-option *ngFor="let key of values" [value]="key.value">
+                              {{key}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+              </div>
+            </div>
+    <!-- factor 2 -->
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label>2. <span>{{selectedOptions[1]}}</span></label>
+                </div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-md-offset-right-4">
+                  <div class="dropdown">
+                      <mat-form-field>
+                          <mat-select>
+                              <mat-option *ngFor="let key of values" [value]="key.value">
+                                  {{key}}
+                                </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+              </div>
+            </div>
+    <!-- factor 3 -->
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label>3. <span>{{selectedOptions[2]}}</span></label>
+                </div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-md-offset-right-4">
+                  <div class="dropdown">
+                      <mat-form-field>
+                          <mat-select>
+                              <mat-option *ngFor="let key of values" [value]="key.value">
+                                  {{key}}
+                              </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+              </div>
+            </div>
+    <!-- factor 4 -->
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label>1. <span>haia</span></label>
+                </div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-md-offset-right-4">
+                  <div class="dropdown">
+                      <mat-form-field>
+                          <mat-select>
+                              <mat-option *ngFor="let key of values" [value]="key.value">
+                                  {{key}}
+                              </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+              </div>
+            </div>
+    <!-- factor 5 -->
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label>1. <span>haia</span></label>
+                </div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-md-offset-right-4">
+                  <div class="dropdown">
+                      <mat-form-field>
+                          <mat-select>
+                              <mat-option *ngFor="let key of values" [value]="key.value">
+                                  {{key}}
+                                </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+              </div>
+            </div>
+    <!-- Buttons -->
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+
+              </form>
+            </div>
+          </div>           
+         </div>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

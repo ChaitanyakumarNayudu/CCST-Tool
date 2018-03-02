@@ -1,8 +1,10 @@
 .main-section{
-    /* background:url("/assets/bg.jpg") no-repeat; */
+    background:url("/assets/bg.jpg") no-repeat;
     background-size:100% 100%;
     margin: 0px;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
+    background-color: aquamarine;
 }
 .login-page-name p{
     font-family: 'Lobster', cursive;

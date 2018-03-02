@@ -1,12 +1,71 @@
-<div class="col-md-6 col-md-offset-3">
-  <h1>Hi {{currentUser.firstName}}!</h1>
-  <p>You're logged in with the MEAN Stack & Angular 2!!</p>
-  <h3>All registered users:</h3>
-  <ul>
-      <li *ngFor="let user of users">
-          {{user.username}} ({{user.firstName}} {{user.lastName}})
-          - <a (click)="deleteUser(user._id)">Delete</a>
-      </li>
-  </ul>
-  <p><a [routerLink]="['/login']">Logout</a></p>
+<!-- top navigation bar -->
+    <nav class="navbar navbar-inverse  navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand">CCST</a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-envelope fa-2x"></i>
+                  <span class="badge">10</span>
+                  </a>
+              </li>
+              <!-- <li class="dropdown">
+                            <a href="#" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <img class="user-image" src="assets/user-logo.png" alt="User Avatar">
+                                <span class="name">User</span><span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="fa fa-user"></i><span>Profile</span></a></li>
+                                <li><a href="#"><i class="fa fa-cog"></i><span>Settings</span></a></li>
+                                <li></li>
+                            </ul>
+              </li> -->
+              <li><a href="#"><i class="fa fa-cog fa-2x"></i></a></li>
+              <li><a href="#"><i class="fa fa-power-off fa-2x"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- body -->
+<div class="container-fluid">
+     <div class="row">
+         <!-- left navigation -->
+         <div class="col-md-3 col-xs-3"  style="margin-top: 60px; padding: 0px;background-color:#6d7fcc;">
+             <div style="position: fixed;left:0;width:100%;background:#6d7fcc">
+                <div class="user_details">
+                    <div class="user_image">
+                        <img src="assets/charan.jpeg" alt="charan">
+                    </div>
+                    <div class="user_name">
+                        <span>Charan Chava</span>
+                        <!-- <ul>
+                            <li>Charan Chava</li>
+                        </ul> -->
+                    </div>
+                    
+                </div>
+                <div class="navbar side-nav">
+                        <ul>
+                            <li class="active"><a routerLink="/dashboard"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Dashboard</span></a></li>
+                            <li><a routerLink="/dashboard/clientlist"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">ClientList</span></a></li>
+                            <li><a routerLink="/dashboard/projects"><i class="fa fa-cubes" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Projects</span></a></li>
+                            <li><a routerLink="/dashboard/satisafactionFactors"><i class="fa fa-list-ol" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Satisfaction Factors</span></a></li>
+                            <li><a routerLink="/dashboard/createForm"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Create Feedback</span></a></li>
+                            <li><a routerLink="/dashboard/userData"><i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i><span class="hidden-xs hidden-sm">User Data</span></a></li>
+                        </ul>
+                    </div>
+         </div>
+        </div>
+         <!-- body-content to render the forms -->
+         <div class="col-md-9 col-xs-9" [ngStyle]="{'height.px':height}" style="background-color:whitesmoke; margin-top: 60px; ">
+             <router-outlet></router-outlet>
+         </div>
+     </div> 
 </div>

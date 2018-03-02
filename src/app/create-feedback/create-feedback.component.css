@@ -1,0 +1,49 @@
+.panel-default> .panel-heading-custom {
+    background-color: #6d7fcc;
+    color: white;
+    font-size: 25px;
+}
+h4,p {
+    font-weight: bold;
+}
+label {
+    font-size: 18px;
+}
+.row1{
+    padding: 10px 0px;
+}
+
+select{
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #6d7fcc;
+    height: 30px;
+    font-weight: bold;
+    color: #6d7fcc;
+}
+option{
+    font-weight: bold;
+}
+*:focus {
+    outline: none;
+}
+.row1 button {
+    width: 100px;
+    height: 35px;
+    margin-left: 350px;
+}
+/* final form font */
+div>p{
+    font-size: 15px;
+}
+p>span{
+    font-weight: normal;
+}
+
+/* second form */
+.mat-header-cell {
+    margin-left: 50px;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}

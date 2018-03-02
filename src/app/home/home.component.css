@@ -1,0 +1,111 @@
+/* top-navbar */
+.navbar {
+    background-color: rgb(13, 14, 53);
+    border-color: white;
+}
+.navbar-brand {
+    font-family: 'Lobster', cursive;
+    font-size: 35px;
+    color: white;
+    padding-left: 75%;
+}
+/* user-profile*/
+.user-image {
+    height: 20px;
+    width: 20px;
+}
+.btn-group a {
+    text-decoration: none;
+}
+.navbar-right li a {
+    color: white;
+}
+.dropdown a{
+    color: white;
+}
+.dropdown-menu i {
+    padding-right: 10px;
+}
+.dropdown-menu a {
+    padding: 8px;
+}
+.caret {
+    margin-left: 5px;
+}
+/* notification badge */
+.badge{
+    position: absolute;
+    top: 8px;
+    left: 28px;
+    border-style: solid;
+    border-color:rgb(13, 14, 53);
+ }
+
+ /* left-side navigation */
+ li,ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.side-nav {
+    margin-bottom: 0px;
+    border: 0px;
+    /* border: 2px solid black; */
+}
+ .side-nav i {
+    font-size: 30px;
+    color: white;
+    margin-right: 0px;
+    padding-right: 15px;
+}
+.side-nav a {
+    /* border-bottom: 1px solid #0d172e;
+    border-top: 1px solid #0d172e; */
+    color: #ffffff;
+    display: block;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 28px 20px;
+    text-decoration: none;
+}
+.side-nav li {
+    background-color: #6d7fcc;
+}
+.side-nav a:hover {
+    background: #7b9ef0 none repeat scroll 0 0;
+    display: block;
+    padding-left: 15px;
+}
+.side-nav a {
+    font-size: 20px;
+    padding: 20px;
+}
+.side-nav a:hover,
+.side-nav .active a {
+        background: #3e74f1 none repeat scroll 0 0;
+        border-left: none;
+        display: block;
+        padding-left: 20px;
+}
+/* USER INFORMATION */
+.user_details {
+    height: 150px;
+    line-height: 150px;
+}
+.user_image {
+    float: left;
+    padding: 0px 15px 0px 15px;
+}
+.user_image img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+.user_name span {
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+#p2 {
+top: 100px;
+}
